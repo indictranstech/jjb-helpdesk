@@ -42,7 +42,7 @@ web_include_css = ["/assets/helpdesk/css/style.css"]
 # ------------
 
 # before_install = "helpdesk.install.before_install"
-after_install = "helpdesk.install.after_install"
+# after_install = "helpdesk.install.after_install"
 
 # Desk Notifications
 # ------------------
@@ -55,7 +55,8 @@ after_install = "helpdesk.install.after_install"
 # Permissions evaluated in scripted ways
 
 permission_query_conditions = {
-	"Issue": "helpdesk.py.issue.get_permission_query_conditions",
+	"Issue": "helpdesk.py.permissions_queries.get_issue_query",
+	"Branch": "helpdesk.py.permissions_queries.get_branch_query"
 }
 #
 # has_permission = {
@@ -67,19 +68,23 @@ permission_query_conditions = {
 # Hook on document methods and events
 
 doc_events = {
+	# "Issue": {
+	# 	"on_update": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.issue_on_update",
+	# 	"on_trash": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.issue_on_trash"
+	# },
 	"Issue": {
-		"on_update": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.issue_on_update",
+		"validate": "helpdesk.py.issue.validate",
 		"on_trash": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.issue_on_trash"
 	},
 	"ToDo": {
-		"validate": "helpdesk.py.todo.validate_todo",
-		"on_update": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.todo_on_update",
-		"on_trash": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.todo_on_trash",
-		"autoname": "helpdesk.utils.autoname_todo"
+		"validate": "helpdesk.py.todo.validate_todo"
+		# "on_update": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.todo_on_update",
+		# "on_trash": "helpdesk.helpdesk.doctype.ticket_escalation_history.ticket_escalation_history.todo_on_trash",
+		# "autoname": "helpdesk.utils.autoname_todo"
 	},
-	"User": {
-		"validate": "helpdesk.py.user.validate_user"
-	},
+	# "User": {
+	# 	"validate": "helpdesk.py.user.validate_user"
+	# },
 	"DocShare": {
 		"validate": "helpdesk.py.docshare.validate_docshare",
 	}
@@ -92,9 +97,9 @@ scheduler_events = {
 	# "all": [
 	# 	"helpdesk.tasks.ticket_escallation"
 	# ],
-	"hourly": [
-		"helpdesk.tasks.ticket_escallation"
-	],
+	# "hourly": [
+	# 	"helpdesk.tasks.ticket_escallation"
+	# ],
 	# "all": [
 	# 	"helpdesk.tasks.ticket_escallation"
 	# ],

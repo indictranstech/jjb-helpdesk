@@ -57,7 +57,7 @@ def get_support_ticket_data(args):
 	args = json.loads(args)
 	query = build_query(args)
 	
-	resultSet = frappe.db.sql(query, as_dict=True)
+	resultSet = frappe.db.sql(query, as_dict=True, debug=True)
 	if not resultSet:
 		return {
 			"total_tickets": 0,
@@ -93,23 +93,28 @@ def build_query(filters):
 		order_by = "ORDER BY {field} ASC".format(field=date_type)
 		# department
 		if filters.get("dept"):
-			department = "AND i.department='%s'"%(filters.get("dept"))
+			department = "AND i.branch='%s'"%(filters.get("dept"))
 
 		# TODO system manager, Administrator, Department Head ticket filters
 		names = ""
-		if "System Manager" in frappe.get_roles(filters.get("user")):
+		roles = frappe.get_roles(filters.get("user"))
+
+		if "System Manager" in roles:
 			names = ""
-		elif "Department Head" in frappe.get_roles(filters.get("user")):
-			names = "AND i.department='{dept}' AND i.name IN (SELECT t.reference_name FROM tabToDo AS t WHERE \
-				(t.owner='{user}' AND t.status='Open') OR t.assigned_by='{user}' AND t.reference_type='Issue' \
-				AND t.reference_name=i.name) OR i.owner='{user}'".format(
-					user=filters.get("user"),
-					dept=frappe.db.get_value("User", filters.get("user"), "department")
-				)
-		else:
+		elif "Support Team" in roles:
 			names = "AND i.name IN (SELECT t.reference_name FROM tabToDo AS t WHERE (t.owner='{user}' AND t.status='Open') \
 				OR t.assigned_by='{user}' AND t.reference_type='Issue' AND t.reference_name=i.name) OR i.owner='{user}'".format(
 					user=filters.get("user")
+				)
+		elif "Branch Manager" in roles:
+			names = "AND i.branch='{dept}' OR i.owner='{user}'".format(
+					user=filters.get("user"),
+					dept=frappe.db.get_value("User", filters.get("user"), "department")
+				)
+		elif "Branch User" in roles:
+			names = "AND i.branch='{dept}' AND i.raised_by='{user}' OR i.owner='{user}'".format(
+					user=filters.get("user"),
+					dept=frappe.db.get_value("User", filters.get("user"), "department")
 				)
 		
 		condition = "WHERE {field} BETWEEN '{start}' AND '{end}' {names} {dept} {status} {order_by}".format(

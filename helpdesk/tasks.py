@@ -39,7 +39,7 @@ def closed_ticket_notifications():
             idx += 1
 
         args = {
-            "email": "shraddha.r@indictranstech.com,makarand.b@indictranstech.com",
+            "email": frappe.db.get_value("User", "Administrator", "name"),
             "user": "Administrator",
             "action": "aggr_ticket_closed",
             "date": date,
@@ -50,9 +50,9 @@ def closed_ticket_notifications():
 def overdue_ticket_notifications():
     date = add_days(getdate(), -1)
 
-    query = """select name, question, branch, opening_date, opening_time from tabIssue where status<>"Closed" and
-                name in (select td.reference_name from tabToDo td where td.reference_type='Issue' 
-                and td.status='Open' and td.date<'{date}')""".format(
+    query = """select name, question, branch, opening_date, opening_time, department, raised_by from tabIssue 
+                where status<>"Closed" and name in (select td.reference_name from tabToDo td where 
+                td.reference_type='Issue' and td.status='Open' and td.date<='{date}')""".format(
         date="%s"%date,
     )
 
@@ -72,8 +72,28 @@ def overdue_ticket_notifications():
             })
             idx += 1
 
+            ticket = {
+                "total":6,
+                1:["Ticket ID", tkt.get("name")],
+                2:["Branch", tkt.get("branch")],
+                3:["Category", tkt.get("department")],
+                4:["Opening Date", tkt.get("opening_date")],
+                5:["Opeing Time", tkt.get("opening_time")],
+                6:["Question", tkt.get("question")],
+                7:["Raised By", tkt.get("raised_by")]
+            }
+            _args = {
+                "date": date,
+                "issue": tkt.get("name"),
+                "user": tkt.get("raised_by"),
+                "action": "aggr_ticket_overdue",
+                "email": tkt.get("raised_by"),
+                "ticket_detail": build_table(ticket, is_horizontal=True)
+            }
+            send_mail(_args, "[HelpDesk][Ticket Overdue] HelpDesk Notifications")
+
         args = {
-            "email": "shraddha.r@indictranstech.com,makarand.b@indictranstech.com",
+            "email": frappe.db.get_value("User", "Administrator", "email"),
             "user": "Administrator",
             "action": "aggr_ticket_overdue",
             "date": date,

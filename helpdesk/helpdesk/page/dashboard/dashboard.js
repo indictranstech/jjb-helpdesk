@@ -54,7 +54,7 @@ helpdesk.DashboardGridView = Class.extend({
 						start: this.page.fields_dict.start.get_parsed_value(),
 						end: this.page.fields_dict.end.get_parsed_value(),
 						status: this.page.fields_dict.status.get_parsed_value(),
-						dept: this.page.fields_dict.department.get_parsed_value(),
+						dept: this.page.fields_dict.branch.get_parsed_value(),
 						user: frappe.user.name
 				}
 			},
@@ -89,8 +89,8 @@ helpdesk.DashboardGridView = Class.extend({
 			default:dateutil.get_today()});
 		this.status = this.page.add_field({fieldtype:"Select", fieldname: "status", 
 			label: __("Ticket Status"), options:["All", "Open", "Pending", "Closed"], default:"All"});
-		this.department = this.page.add_field({fieldtype:"Link", label:"Category",
-			fieldname:"department", options:"Department", default:frappe.boot.department});
+		this.department = this.page.add_field({fieldtype:"Link", label:"Branch",
+			fieldname:"branch", options:"Branch"});
 	},
 	bind_filters:function(){
 		var me = this
@@ -254,7 +254,7 @@ helpdesk.DashboardGridView = Class.extend({
 		if(this.check_mandatory_fields()){
 			start = new Date(this.page.fields_dict.start.get_parsed_value());
 			end = new Date(this.page.fields_dict.end.get_parsed_value());
-			dept = this.page.fields_dict.department.get_parsed_value();
+			dept = this.page.fields_dict.branch.get_parsed_value();
 			status = this.page.fields_dict.status.get_parsed_value();
 	
 			if(end < start){

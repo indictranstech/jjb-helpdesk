@@ -38,7 +38,7 @@ def send_mail(args, subject):
         template = email_templates.get(args.get("action"))
 
         args.update({
-        	"fullname": get_user_fullname(args.get("user")) or "Guest"
+        	"fullname": get_user_fullname(args.get("user")) or "User"
         })
         frappe.sendmail(recipients=args.get("email"), sender=sender, subject=subject,
             message=frappe.get_template(template).render(args))
@@ -118,11 +118,16 @@ def get_users_email_ids(users):
     if emails:
         return [email[0] for email in emails]
 
+# email_templates = {
+# 	"open_tickets": "templates/email/open_ticket_template.html",
+# 	"new_ticket": "templates/email/new_ticket_template.html",
+#     "escalate_ticket": "templates/email/escalate_ticket_template.html",
+#     "cant_escalate_tickets": "templates/email/cant_escalate_ticket_template.html",
+#     "user_issue_notification": "templates/email/user_issue_raised.html",
+#     "conference_notification": "templates/email/conference_book.html"
+# }
 email_templates = {
-	"open_tickets": "templates/email/open_ticket_template.html",
-	"new_ticket": "templates/email/new_ticket_template.html",
-    "escalate_ticket": "templates/email/escalate_ticket_template.html",
-    "cant_escalate_tickets": "templates/email/cant_escalate_ticket_template.html",
-    "user_issue_notification": "templates/email/user_issue_raised.html",
-    "conference_notification": "templates/email/conference_book.html"
+    "ticket_closed": "templates/email/close_ticket_template.html",
+    "aggr_ticket_closed": "templates/email/aggr_ticket_closed.html",
+    "aggr_ticket_overdue": "templates/email/aggr_ticket_overdue.html"
 }

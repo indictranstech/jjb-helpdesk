@@ -1,21 +1,5 @@
 import frappe
-
-def get_permission_query_conditions(user):
-	if not user: user = frappe.session.user
-
-	if "System Manager" in frappe.get_roles(user):
-		return None
-	else:
-		return """\
-		 (tabIssue.owner = '{user}' or tabIssue.raised_by = '{user}') 
-		 or (tabIssue.name in (select tabToDo.reference_name from tabToDo where
-		 	(tabToDo.owner = '{user}' or tabToDo.assigned_by = '{user}') and tabToDo.status = 'Open' 
-		 	and tabToDo.reference_type = 'Issue' and tabToDo.reference_name=tabIssue.name))\
-		 """.format(user=frappe.db.escape(user))
-
-
-
-
+from helpdesk.utils import send_mail, build_table
 
 @frappe.whitelist(allow_guest=True)
 def get_subject_and_department_list():
@@ -48,4 +32,27 @@ def raise_issue(**args):
 	# issue.subject = HTMLParser.HTMLParser().unescape(args.subject)
 
 	issue.save(ignore_permissions=True)
-	return issue.name
+	return issue.names
+
+def validate(doc, method):
+	if doc.prev_status != doc.status and doc.status == "Closed":
+		# send mail to user
+		ticket = {
+			"total":6,
+			# "head": ["Ticket ID", "Department", "Opening Date", "Opening Time", "Subject", "Raised By"]
+			1:["Ticket ID", doc.name],
+			2:["Branch", doc.branch],
+			3:["Category", doc.department],
+			4:["Opening Date", doc.opening_date],
+			5:["Opeing Time", doc.opening_time],
+			6:["Question", doc.question],
+			7:["Raised By", doc.raised_by]
+		}
+		args = {
+			"email": "shraddha.r@indictranstech.com",
+			"user": doc.raised_by,
+			"issue": doc.name,
+			"action": "ticket_closed",
+			"ticket_detail": build_table(ticket, is_horizontal=True)
+		}
+		send_mail(args, "[HelpDesk][Ticket Closed] HelpDesk Notifications")

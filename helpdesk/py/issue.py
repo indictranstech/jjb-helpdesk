@@ -36,10 +36,10 @@ def raise_issue(**args):
 
 def validate(doc, method):
 	if doc.prev_status != doc.status and doc.status == "Closed":
+		doc.prev_status = doc.status
 		# send mail to user
 		ticket = {
 			"total":6,
-			# "head": ["Ticket ID", "Department", "Opening Date", "Opening Time", "Subject", "Raised By"]
 			1:["Ticket ID", doc.name],
 			2:["Branch", doc.branch],
 			3:["Category", doc.department],
@@ -49,10 +49,12 @@ def validate(doc, method):
 			7:["Raised By", doc.raised_by]
 		}
 		args = {
-			"email": "shraddha.r@indictranstech.com",
+			"email": doc.raised_by,
 			"user": doc.raised_by,
 			"issue": doc.name,
 			"action": "ticket_closed",
 			"ticket_detail": build_table(ticket, is_horizontal=True)
 		}
 		send_mail(args, "[HelpDesk][Ticket Closed] HelpDesk Notifications")
+	else:
+		doc.prev_status = doc.status

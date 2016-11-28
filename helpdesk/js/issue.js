@@ -1,19 +1,13 @@
 cur_frm.add_fetch("raised_email", "mobile_number", "mobile_number")
+cur_frm.add_fetch("question", "category", "department")
+cur_frm.add_fetch("question", "sub_category", "sub_category")
 
 frappe.ui.form.on("Issue", {
-	// onload: function(frm) {
-	// 	if(inList(user_roles, "Administrator")){
-	// 		cur_frm.toggle_reqd("department", true)
-	// 	}
-	// 	else{
-	// 		cur_frm.toggle_enable("department", false)
-	// 	}
-	// },
 	refresh: function(frm) {
 		fields = ["raised_email", "branch", "branch_phone_no", "mobile_number", "question", "priority",
 		"problem_since_", "department", "sub_category", "description"]
 
-		if(!inList(user_roles, "Administrator") && !inList(user_roles, "Branch User")) {
+		if(!inList(user_roles, "Branch User")) {
 			$.each(fields, function(idx, field) {
 				cur_frm.toggle_enable(field, false)
 			})

@@ -54,10 +54,18 @@ def get_support_ticket_data(args):
 	"""
 	# TODO check permissions
 	# only fetch the issue whose issue->owner or todo->[owner or assigned by] is user
+	# def is_branch_user():
+	# 	if "Administrator" in roles or "Support Team" in roles:
+	# 		return True
+	# 	else:
+	# 		return False
+
 	args = json.loads(args)
 	query = build_query(args)
 	
+	roles = frappe.get_roles(frappe.session.user)
 	resultSet = frappe.db.sql(query, as_dict=True, debug=True)
+	links = filter(lambda link: ("Administrator" in roles or "Support Team" in roles) or link.get("title") not in ["ToDo", "Desk"], links_info)
 	if not resultSet:
 		return {
 			"total_tickets": 0,
@@ -65,12 +73,12 @@ def get_support_ticket_data(args):
 			"closed_tickets": 0,
 			"pending_tickets": 0,
 			"plot_data": None,
-			"links":links_info
+			"links":links
 		}
 
 	day_wise_record = get_day_wise_records(resultSet)
 	resultSet = get_data_in_flot_format(args.get("start"), args.get("end"), args.get("status"), day_wise_record)
-	resultSet.update({"links":links_info})
+	resultSet.update({"links":links})
 
 	return resultSet
 	

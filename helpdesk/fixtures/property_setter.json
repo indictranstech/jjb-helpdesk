@@ -708,7 +708,7 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-11-28 09:49:06.788282", 
+  "modified": "2016-11-28 12:05:51.611607", 
   "name": "Issue-read_only_onload", 
   "property": "read_only_onload", 
   "property_type": "Check", 
@@ -721,10 +721,10 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-11-28 09:49:09.771736", 
+  "modified": "2016-11-28 12:05:56.105005", 
   "name": "Issue-_idx", 
   "property": "_idx", 
   "property_type": "Text", 
-  "value": "[\"raised_email\", \"mobile_number\", \"column_break\", \"branch\", \"branch_phone_no\", \"prev_status\", \"status\", \"subject_section\", \"naming_series\", \"question\", \"priority\", \"problem_since_\", \"subject\", \"department\", \"sub_category\", \"cb00\", \"raised_by\", \"cabin_or_workstation_number\", \"description\", \"resolution_date\", \"resolution_details\", \"fold\", \"section_break_7\", \"column_break_9\", \"first_responded_on\", \"additional_info\", \"lead\", \"contact\", \"column_break_16\", \"customer\", \"customer_name\", \"section_break_19\", \"remark\", \"column_break1\", \"opening_date\", \"opening_time\", \"company\", \"content_type\", \"attachment\", \"email_id\"]"
+  "value": "[\"raised_email\", \"mobile_number\", \"column_break\", \"branch\", \"branch_phone_no\", \"prev_status\", \"status\", \"subject_section\", \"naming_series\", \"department\", \"sub_category\", \"question\", \"priority\", \"problem_since_\", \"subject\", \"cb00\", \"raised_by\", \"cabin_or_workstation_number\", \"description\", \"resolution_date\", \"resolution_details\", \"fold\", \"section_break_7\", \"column_break_9\", \"first_responded_on\", \"additional_info\", \"lead\", \"contact\", \"column_break_16\", \"customer\", \"customer_name\", \"section_break_19\", \"remark\", \"column_break1\", \"opening_date\", \"opening_time\", \"company\", \"content_type\", \"attachment\", \"email_id\"]"
  }
 ]

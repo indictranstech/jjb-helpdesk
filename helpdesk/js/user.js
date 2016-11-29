@@ -4,3 +4,5 @@
 // 		inList(["Administrator", "Guest"], frm.doc.name)?false:cur_frm.toggle_reqd("department", true);
 // 	},
 // });
+
+cur_frm.add_fetch("department", "phone_number", "phone_number")

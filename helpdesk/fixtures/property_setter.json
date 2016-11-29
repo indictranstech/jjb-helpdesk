@@ -677,19 +677,6 @@
  }, 
  {
   "default_value": null, 
-  "doc_type": "User", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocType", 
-  "field_name": null, 
-  "modified": "2016-11-17 18:36:28.476479", 
-  "name": "User-_idx", 
-  "property": "_idx", 
-  "property_type": "Text", 
-  "value": "[\"sb0_5\", \"enabled\", \"section_break_3\", \"email\", \"first_name\", \"middle_name\", \"last_name\", \"mobile_number\", \"department\", \"username\", \"send_welcome_email\", \"unsubscribed\", \"column_break0\", \"language\", \"time_zone\", \"user_image\", \"short_bio\", \"gender\", \"birth_date\", \"location\", \"column_break_22\", \"bio\", \"mute_sounds\", \"change_password\", \"new_password\", \"send_password_update_notification\", \"reset_password_key\", \"email_settings\", \"thread_notify\", \"email_signature\", \"background\", \"background_image\", \"background_style\", \"sb1\", \"roles_html\", \"user_roles\", \"modules_access\", \"modules_html\", \"block_modules\", \"sb2\", \"defaults\", \"sb3\", \"user_type\", \"login_after\", \"login_before\", \"restrict_ip\", \"column_break1\", \"last_login\", \"last_ip\", \"last_active\", \"last_known_versions\", \"third_party_authentication\", \"fb_username\", \"fb_userid\", \"google_userid\", \"column_break_49\", \"github_userid\", \"github_username\"]"
- }, 
- {
-  "default_value": null, 
   "doc_type": "ToDo", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
@@ -703,16 +690,42 @@
  }, 
  {
   "default_value": null, 
-  "doc_type": "Issue", 
+  "doc_type": "Branch", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-11-28 12:05:51.611607", 
-  "name": "Issue-read_only_onload", 
+  "modified": "2016-11-29 12:56:41.476672", 
+  "name": "Branch-_idx", 
+  "property": "_idx", 
+  "property_type": "Text", 
+  "value": "[\"branch_code\", \"branch\", \"cb00\", \"phone_number\", \"email_id\"]"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Branch", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-11-29 14:13:02.896874", 
+  "name": "Branch-read_only_onload", 
   "property": "read_only_onload", 
   "property_type": "Check", 
   "value": null
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "User", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-11-29 17:38:23.685119", 
+  "name": "User-_idx", 
+  "property": "_idx", 
+  "property_type": "Text", 
+  "value": "[\"sb0_5\", \"enabled\", \"section_break_3\", \"email\", \"first_name\", \"middle_name\", \"last_name\", \"mobile_number\", \"department\", \"phone_number\", \"username\", \"send_welcome_email\", \"unsubscribed\", \"column_break0\", \"language\", \"time_zone\", \"user_image\", \"short_bio\", \"gender\", \"birth_date\", \"location\", \"column_break_22\", \"bio\", \"mute_sounds\", \"change_password\", \"new_password\", \"send_password_update_notification\", \"reset_password_key\", \"email_settings\", \"thread_notify\", \"email_signature\", \"background\", \"background_image\", \"background_style\", \"sb1\", \"roles_html\", \"user_roles\", \"modules_access\", \"modules_html\", \"block_modules\", \"sb2\", \"defaults\", \"sb3\", \"user_type\", \"login_after\", \"login_before\", \"restrict_ip\", \"column_break1\", \"last_login\", \"last_ip\", \"last_active\", \"last_known_versions\", \"third_party_authentication\", \"fb_username\", \"fb_userid\", \"google_userid\", \"column_break_49\", \"github_userid\", \"github_username\"]"
  }, 
  {
   "default_value": null, 
@@ -721,10 +734,23 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-11-28 12:05:56.105005", 
+  "modified": "2016-11-29 18:06:26.268265", 
   "name": "Issue-_idx", 
   "property": "_idx", 
   "property_type": "Text", 
-  "value": "[\"raised_email\", \"mobile_number\", \"column_break\", \"branch\", \"branch_phone_no\", \"prev_status\", \"status\", \"subject_section\", \"naming_series\", \"department\", \"sub_category\", \"question\", \"priority\", \"problem_since_\", \"subject\", \"cb00\", \"raised_by\", \"cabin_or_workstation_number\", \"description\", \"resolution_date\", \"resolution_details\", \"fold\", \"section_break_7\", \"column_break_9\", \"first_responded_on\", \"additional_info\", \"lead\", \"contact\", \"column_break_16\", \"customer\", \"customer_name\", \"section_break_19\", \"remark\", \"column_break1\", \"opening_date\", \"opening_time\", \"company\", \"content_type\", \"attachment\", \"email_id\"]"
+  "value": "[\"raised_email\", \"mobile_number\", \"column_break\", \"branch\", \"phone_number\", \"prev_status\", \"status\", \"subject_section\", \"naming_series\", \"department\", \"sub_category\", \"question\", \"priority\", \"problem_since_\", \"subject\", \"cb00\", \"raised_by\", \"cabin_or_workstation_number\", \"description\", \"resolution_date\", \"resolution_details\", \"fold\", \"section_break_7\", \"column_break_9\", \"first_responded_on\", \"additional_info\", \"lead\", \"contact\", \"column_break_16\", \"customer\", \"customer_name\", \"section_break_19\", \"remark\", \"column_break1\", \"opening_date\", \"opening_time\", \"company\", \"content_type\", \"attachment\", \"email_id\"]"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Issue", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-11-29 18:16:28.165902", 
+  "name": "Issue-read_only_onload", 
+  "property": "read_only_onload", 
+  "property_type": "Check", 
+  "value": null
  }
 ]

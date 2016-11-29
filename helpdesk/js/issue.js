@@ -1,6 +1,7 @@
 cur_frm.add_fetch("raised_email", "mobile_number", "mobile_number")
 cur_frm.add_fetch("question", "category", "department")
 cur_frm.add_fetch("question", "sub_category", "sub_category")
+cur_frm.add_fetch("branch", "phone_number", "phone_number")
 
 frappe.ui.form.on("Issue", {
 	refresh: function(frm) {

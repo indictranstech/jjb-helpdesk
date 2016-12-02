@@ -69,3 +69,4 @@ def validate(doc, method):
 		)
 		
 		doc.add_comment("Email", comment)
+		doc.old_resolution_details = doc.resolution_details

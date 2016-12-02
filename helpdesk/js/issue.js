@@ -13,6 +13,9 @@ frappe.ui.form.on("Issue", {
 				cur_frm.toggle_enable(field, false)
 			})
 		}
+		if(inList(user_roles, "Support Team")) {
+			cur_frm.toggle_reqd("resolution_details", true)
+		}
 	}
 });
 

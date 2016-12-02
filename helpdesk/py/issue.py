@@ -58,3 +58,14 @@ def validate(doc, method):
 		send_mail(args, "[HelpDesk][Ticket Closed] HelpDesk Notifications")
 	else:
 		doc.prev_status = doc.status
+
+	if doc.resolution_details != doc.old_resolution_details:
+		comment = "<div class='media-content-wrapper' style='padding-left:35px'><div class='reply small'>\
+		Status : {status}<br>Old Resolution Details: {old_resolution_details}<br>\
+		Resolution Details: {resolution_details}</div></div>".format(
+			status=doc.status,
+			old_resolution_details=doc.old_resolution_details,
+			resolution_details=doc.resolution_details
+		)
+		
+		doc.add_comment("Email", comment)

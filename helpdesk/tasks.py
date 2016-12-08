@@ -50,9 +50,8 @@ def closed_ticket_notifications():
 def overdue_ticket_notifications():
     date = add_days(getdate(), -1)
 
-    query = """select name, question, branch, opening_date, opening_time, department, raised_by from tabIssue 
-                where status<>"Closed" and name in (select td.reference_name from tabToDo td where 
-                td.reference_type='Issue' and td.status='Open' and td.date<='{date}')""".format(
+    query = """select distinct(tabIssue.name), tabIssue.question, tabIssue.branch, tabIssue.opening_date, tabIssue.opening_time, tabIssue.department, tabIssue.raised_by,tabToDo.owner
+FROM tabIssue LEFT JOIN tabToDo ON tabIssue.name=tabToDo.reference_name where tabIssue.status<>"Closed" and  tabIssue.name in (select td.reference_name from tabToDo td where td.reference_type='Issue' and td.status='Open'and td.date<='{date}')""".format(
         date="%s"%date,
     )
 
@@ -61,14 +60,14 @@ def overdue_ticket_notifications():
 
     if names:
         tickets = {
-            "head": ["SR", "Ticket ID", "Question", "Branch", "Opening Date", "Opening Time"],
+            "head": ["SR", "Ticket ID", "Question", "Branch", "Opening Date", "Opening Time","Assigned To"],
             "total": len(names)
         }
 
         idx = 1
         for tkt in names:
             tickets.update({
-                idx: [idx, tkt.get("name"), tkt.get("question"), tkt.get("branch"), tkt.get("opening_date"), tkt.get("opening_time")]
+                idx: [idx, tkt.get("name"), tkt.get("question"), tkt.get("branch"), tkt.get("opening_date"), tkt.get("opening_time"),tkt.get("owner")]
             })
             idx += 1
 
@@ -80,7 +79,8 @@ def overdue_ticket_notifications():
                 4:["Opening Date", tkt.get("opening_date")],
                 5:["Opeing Time", tkt.get("opening_time")],
                 6:["Question", tkt.get("question")],
-                7:["Raised By", tkt.get("raised_by")]
+                7:["Raised By", tkt.get("raised_by")],
+                8:["Assigned To",tkt.get("owner")]
             }
             _args = {
                 "date": date,
@@ -93,12 +93,13 @@ def overdue_ticket_notifications():
             send_mail(_args, "[HelpDesk][Ticket Overdue] HelpDesk Notifications")
 
         args = {
-            "email": frappe.db.get_value("User", "Administrator", "email"),
+            "email":frappe.db.get_value("User", "Administrator", "email"),
             "user": "Administrator",
             "action": "aggr_ticket_overdue",
             "date": date,
             "ticket_detail": build_table(tickets)
         }
+       
         send_mail(args, "[HelpDesk][Tickets Overdue] HelpDesk Notifications")
 
 def sync_db():

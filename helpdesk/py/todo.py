@@ -2,6 +2,7 @@ import frappe
 from datetime import datetime, timedelta
 # import datetime
 from frappe.utils import get_datetime, time_diff_in_hours
+from helpdesk.utils import send_mail
 
 def validate_todo(doc, method):
 	if doc.reference_type == "Issue" and doc.status != "Closed":
@@ -10,6 +11,19 @@ def validate_todo(doc, method):
 	elif doc.reference_type == "Issue" and doc.status == "Closed":
 		# delete the share doc from user
 		pass
+
+
+def send_assign_mail(doc, method):
+	if doc.reference_type == "Issue" and doc.status == "Open":
+		args = {
+			"email":doc.owner,
+			"user": doc.owner,
+			"action":"assign_issue_notification",
+			"Issue_No": doc.reference_name
+		}
+		send_mail(args,"JJSB Hepldesk Ticket")
+		
+
 
 def validate_issue_status(issue, todo_status):
 	if frappe.db.get_value("Issue", issue, "status") == "Closed":

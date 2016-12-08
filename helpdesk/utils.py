@@ -129,5 +129,6 @@ def get_users_email_ids(users):
 email_templates = {
     "ticket_closed": "templates/email/close_ticket_template.html",
     "aggr_ticket_closed": "templates/email/aggr_ticket_closed.html",
-    "aggr_ticket_overdue": "templates/email/aggr_ticket_overdue.html"
+    "aggr_ticket_overdue": "templates/email/aggr_ticket_overdue.html",
+    "assign_issue_notification":"templates/email/assign_issue_notification.html"
 }

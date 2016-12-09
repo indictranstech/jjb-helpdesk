@@ -703,19 +703,6 @@
  }, 
  {
   "default_value": null, 
-  "doc_type": "Branch", 
-  "docstatus": 0, 
-  "doctype": "Property Setter", 
-  "doctype_or_field": "DocType", 
-  "field_name": null, 
-  "modified": "2016-11-29 14:13:02.896874", 
-  "name": "Branch-read_only_onload", 
-  "property": "read_only_onload", 
-  "property_type": "Check", 
-  "value": null
- }, 
- {
-  "default_value": null, 
   "doc_type": "User", 
   "docstatus": 0, 
   "doctype": "Property Setter", 
@@ -734,11 +721,11 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-11-29 18:06:26.268265", 
-  "name": "Issue-_idx", 
-  "property": "_idx", 
-  "property_type": "Text", 
-  "value": "[\"raised_email\", \"mobile_number\", \"column_break\", \"branch\", \"phone_number\", \"prev_status\", \"status\", \"subject_section\", \"naming_series\", \"department\", \"sub_category\", \"question\", \"priority\", \"problem_since_\", \"subject\", \"cb00\", \"raised_by\", \"cabin_or_workstation_number\", \"description\", \"resolution_date\", \"resolution_details\", \"fold\", \"section_break_7\", \"column_break_9\", \"first_responded_on\", \"additional_info\", \"lead\", \"contact\", \"column_break_16\", \"customer\", \"customer_name\", \"section_break_19\", \"remark\", \"column_break1\", \"opening_date\", \"opening_time\", \"company\", \"content_type\", \"attachment\", \"email_id\"]"
+  "modified": "2016-12-02 12:39:55.779836", 
+  "name": "Issue-read_only_onload", 
+  "property": "read_only_onload", 
+  "property_type": "Check", 
+  "value": null
  }, 
  {
   "default_value": null, 
@@ -747,8 +734,21 @@
   "doctype": "Property Setter", 
   "doctype_or_field": "DocType", 
   "field_name": null, 
-  "modified": "2016-11-29 18:16:28.165902", 
-  "name": "Issue-read_only_onload", 
+  "modified": "2016-12-02 12:39:59.863784", 
+  "name": "Issue-_idx", 
+  "property": "_idx", 
+  "property_type": "Text", 
+  "value": "[\"raised_email\", \"mobile_number\", \"column_break\", \"branch\", \"phone_number\", \"prev_status\", \"status\", \"subject_section\", \"naming_series\", \"department\", \"sub_category\", \"question\", \"priority\", \"problem_since_\", \"subject\", \"cb00\", \"raised_by\", \"cabin_or_workstation_number\", \"description\", \"resolution_date\", \"old_resolution_details\", \"resolution_details\", \"fold\", \"section_break_7\", \"column_break_9\", \"first_responded_on\", \"additional_info\", \"lead\", \"contact\", \"column_break_16\", \"customer\", \"customer_name\", \"section_break_19\", \"remark\", \"column_break1\", \"opening_date\", \"opening_time\", \"company\", \"content_type\", \"attachment\", \"email_id\"]"
+ }, 
+ {
+  "default_value": null, 
+  "doc_type": "Branch", 
+  "docstatus": 0, 
+  "doctype": "Property Setter", 
+  "doctype_or_field": "DocType", 
+  "field_name": null, 
+  "modified": "2016-12-02 15:02:45.803013", 
+  "name": "Branch-read_only_onload", 
   "property": "read_only_onload", 
   "property_type": "Check", 
   "value": null

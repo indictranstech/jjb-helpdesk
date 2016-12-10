@@ -561,7 +561,7 @@
   "in_list_view": 1, 
   "insert_after": null, 
   "label": "Branch Code", 
-  "modified": "2016-12-09 10:45:02.934569", 
+  "modified": "2016-12-10 18:06:18.238083", 
   "name": "Branch-branch_code", 
   "no_copy": 0, 
   "options": null, 
@@ -574,7 +574,7 @@
   "report_hide": 0, 
   "reqd": 1, 
   "search_index": 0, 
-  "unique": 1, 
+  "unique": 0, 
   "width": null
  }, 
  {

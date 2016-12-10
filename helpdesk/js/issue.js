@@ -1,14 +1,15 @@
 cur_frm.add_fetch("raised_email", "mobile_number", "mobile_number")
+cur_frm.add_fetch("raised_email", "department", "branch")
+cur_frm.add_fetch("branch", "phone_number", "phone_number")
 cur_frm.add_fetch("question", "category", "department")
 cur_frm.add_fetch("question", "sub_category", "sub_category")
-cur_frm.add_fetch("branch", "phone_number", "branch_phone_number")
 
 frappe.ui.form.on("Issue", {
 	refresh: function(frm) {
 		fields = ["raised_email", "branch", "branch_phone_no", "mobile_number", "question", "priority",
 		"problem_since_", "department", "sub_category", "description"]
 
-		if(!inList(user_roles, "Branch User")) {
+		if(!has_common(user_roles, ["Branch User", "Branch Manager"])) {
 			$.each(fields, function(idx, field) {
 				cur_frm.toggle_enable(field, false)
 			})

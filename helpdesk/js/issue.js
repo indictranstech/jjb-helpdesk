@@ -1,8 +1,8 @@
-cur_frm.add_fetch("raised_email", "mobile_number", "mobile_number")
-cur_frm.add_fetch("raised_email", "department", "branch")
-cur_frm.add_fetch("branch", "phone_number", "phone_number")
+// cur_frm.add_fetch("raised_email", "mobile_number", "mobile_number")
+// cur_frm.add_fetch("raised_email", "department", "branch")
 cur_frm.add_fetch("question", "category", "department")
 cur_frm.add_fetch("question", "sub_category", "sub_category")
+cur_frm.add_fetch("branch", "phone_number", "phone_number")
 
 frappe.ui.form.on("Issue", {
 	refresh: function(frm) {
@@ -17,6 +17,22 @@ frappe.ui.form.on("Issue", {
 		if(inList(user_roles, "Support Team")) {
 			cur_frm.toggle_reqd("resolution_details", true)
 		}
+	},
+
+	raised_email: function(frm) {
+		frappe.call({
+			method: "helpdesk.py.issue.fetch_values",
+			args: {
+				"raised_email": frm.doc.raised_email 
+			},
+			callback: function(r) {
+				if(r.message){
+					$.each(r.message, function(field, val) {
+						frm.set_value(field, val)
+					})
+				}
+			}
+		})
 	}
 });
 

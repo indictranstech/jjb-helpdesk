@@ -70,3 +70,15 @@ def validate(doc, method):
 		
 		doc.add_comment("Email", comment)
 		doc.old_resolution_details = doc.resolution_details
+
+@frappe.whitelist()
+def fetch_values(raised_email):
+	branch = phone_number = {}
+	branch = frappe.db.get_value("User", raised_email or frappe.session.user, ["department as branch", "mobile_number"], as_dict=True)
+	if branch and branch.get("branch"):
+		phone_number = frappe.db.get_value("Branch", branch.get("branch"), "phone_number", as_dict=True)
+
+	branch.update(phone_number)
+	frappe.errprint([branch])
+
+	return branch or {}

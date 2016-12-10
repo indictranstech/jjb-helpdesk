@@ -22,8 +22,6 @@ def send_assign_mail(doc, method):
 			"Issue_No": doc.reference_name
 		}
 		send_mail(args,"JJSB Hepldesk Ticket")
-		
-
 
 def validate_issue_status(issue, todo_status):
 	if frappe.db.get_value("Issue", issue, "status") == "Closed":

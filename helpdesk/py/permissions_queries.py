@@ -20,7 +20,7 @@ def get_issue_query(user):
 		return """\
 		 (tabIssue.owner = '{user}' or tabIssue.raised_by = '{user}')
 		 or (tabIssue.name in (select tabToDo.reference_name from tabToDo where
-		 	(tabToDo.owner = '{user}' or tabToDo.assigned_by = '{user}') and tabToDo.status = 'Open' 
+		 	(tabToDo.owner = '{user}' or tabToDo.assigned_by = '{user}') and tabToDo.status in ('Open', 'Closed') 
 		 	and tabToDo.reference_type = 'Issue' and tabToDo.reference_name=tabIssue.name))\
 		 """.format(user=frappe.db.escape(user))
 	elif "Branch Manager" in roles:

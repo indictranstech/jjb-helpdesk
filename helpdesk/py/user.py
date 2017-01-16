@@ -44,10 +44,10 @@ def user_query(doctype, txt, searchfield, start, page_len, filters):
 					key=searchfield,
 				)
 
-	if "Administrator" in frappe.get_roles():
+	if "Admin" in frappe.get_roles():
 		return frappe.db.sql(query, tuple(["%%%s%%"%txt, "%%%s%%"%txt, start, page_len]))
 	elif "Support Team" in frappe.get_roles():
-		return (("Administrator"))
+		return (("Admin"))
 	else:
 		return (())
 
